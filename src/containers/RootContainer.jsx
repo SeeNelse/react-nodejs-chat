@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import NavBarComponent from "./NavBarComponent";
@@ -19,27 +19,25 @@ const mapDispatchToProps = function(dispatch) {
 	}, dispatch)
 };
 
-class RootContainer extends React.Component {
-	componentDidMount() {
+function RootContainer(props) {
+	useEffect(() => {
 		if (sessionStorage.getItem('username')) {
-			this.props.Login(sessionStorage.getItem('username'))
+			props.Login(sessionStorage.getItem('username'))
 		}
-	}
-
-	render() {
-		return (
-			<React.Fragment>
-				{
-					this.props.isLogged ?
-						<React.Fragment>
-							<NavBarComponent />
-							<ChatContainer />
-						</React.Fragment> :
-						<LoginFormContainer />
-				}
-			</React.Fragment>
-		)
-	}
+	});
+	
+	return (
+		<React.Fragment>
+			{
+				props.isLogged ?
+					<React.Fragment>
+						<NavBarComponent />
+						<ChatContainer />
+					</React.Fragment> :
+					<LoginFormContainer />
+			}
+		</React.Fragment>
+	)
 }
 
 RootContainer.propTypes = {

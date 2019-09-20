@@ -25,20 +25,20 @@ function NavBarComponent(props) {
 	}
 
 	return (
-		<Navbar bg="dark" variant="dark" className='mb-3'>
-			<Container>
-				<Row style={{width: '100%'}}>
-					<Col xs={12} className="d-flex align-items-center justify-content-between">
+		<Container>
+			<Row>
+				<Col xs={12} className="">
+					<Navbar bg="dark" variant="dark" className='mb-3 d-flex align-items-center justify-content-between'>
 						<Navbar.Brand href="#home">React chat</Navbar.Brand>
 						<Nav>
 							<NavDropdown className='text-white' title={`Hello, ${props.userName}!`} id="collasible-nav-dropdown">
 								<NavDropdown.Item onClick={handleLogout} >Logout</NavDropdown.Item>
 							</NavDropdown>
 						</Nav>
-					</Col>
-				</Row>
-			</Container>
-		</Navbar>
+					</Navbar>
+				</Col>
+			</Row>
+		</Container>
 	)
 }
 

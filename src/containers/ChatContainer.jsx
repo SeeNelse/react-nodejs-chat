@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import MessageForm from '../components/MessageForm';
 import Message from '../components/Message';
 import { Container, Row, Col, Alert } from 'react-bootstrap';
@@ -12,21 +12,20 @@ const mapStateToProps = function(state) {
 };
 
 function ChatContainer(props) {
-	componentDidMount() {
-		this.refs['chat-window'].lastChild.scrollIntoView();
-	}
+	const chatWindow = useRef();
 
-	componentDidUpdate(prevProps, prevState, snapshot) {
-		if (prevProps.chatHistory.length !== this.props.chatHistory) {
-			this.refs['chat-window'].lastChild.scrollIntoView();
-		}
-	}
+	useEffect(() => {
+		chatWindow.current.lastChild.scrollIntoView();
+	});
 
 	return (
 		<React.Fragment>
 			<Container>
 				<Row>
-					<Col ref='chat-window' xs={12} className='chat-window'>
+					<Col md={4} sm={12}>
+						nicknames
+					</Col>
+					<Col ref={chatWindow} md={8} sm={12} className='chat-window'>
 						{
 							props.chatHistory.length ?
 							props.chatHistory.map((el, index) => {
